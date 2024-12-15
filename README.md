@@ -37,15 +37,15 @@ Refer to `OPCODE.cs` for a full list of supported opcodes.
 ### Example
 **Input (`input.txt`):**
 ```
-ADD, 1, 2, 3
-SUB, 4, 5, 6
+ADDI   , 0, 2, 2
+ADDI   , 0, 3, 242
 INVALID, 0, 1, 2
 ```
 
 **Output (`output.txt`):**
 ```
-000000000010001000110
-000001000100010001110
+01100000000000100000000000000010
+01100000000000110000000011110010
 00000000000000000000000000000000 Failed
 ```
 
