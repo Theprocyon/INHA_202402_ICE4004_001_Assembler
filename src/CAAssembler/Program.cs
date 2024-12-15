@@ -19,7 +19,8 @@ namespace CAAssembler
 
             if (!File.Exists(INPUTPATH))
             {
-                Console.WriteLine("Cannot find input file");
+                Console.WriteLine("Cannot find input file : " + INPUTPATH);
+                Console.ReadKey();
                 return;
             }
 
