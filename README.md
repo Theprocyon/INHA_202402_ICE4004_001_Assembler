@@ -13,7 +13,7 @@ Refer to `OPCODE.cs` for a full list of supported opcodes.
 
 ---
 
-### Usage
+### How to use
 1. **Prepare Input File**:
    - Create an `input.txt` file with assembly instructions, one per line.
    
