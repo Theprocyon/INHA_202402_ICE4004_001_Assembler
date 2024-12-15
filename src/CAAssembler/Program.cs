@@ -45,7 +45,7 @@ namespace CAAssembler
                         else
                         {
                             parseFailCnt++;
-                            wr.WriteLine(new string('0', 32) + " F ");
+                            wr.WriteLine(new string('0', 32) + " Failed");
                         }
 
                     }
@@ -53,9 +53,14 @@ namespace CAAssembler
             }
             catch (Exception e) { Console.WriteLine(e.StackTrace); }
             finally {; }
+
             Console.WriteLine("Assembling Done!", parseCnt);
             Console.WriteLine("ParseCnt : {0}", parseCnt);
             Console.WriteLine("ParseFailCnt : {0}", parseFailCnt);
+
+
+            Console.WriteLine("Press any key to Exit..");
+            Console.ReadKey();
         }
     }
 

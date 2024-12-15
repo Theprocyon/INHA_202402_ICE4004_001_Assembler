@@ -68,7 +68,6 @@ namespace CAAssembler
             sb.Append(Convert.ToString(opcode._opcode, 2).PadLeft(6, '0'));
 
             Console.WriteLine("OPCODE Parse Done : " + sb.ToString());
-            Console.WriteLine("PL : " + parsed.Length);
 
             switch (opcode._insttype)
             {
