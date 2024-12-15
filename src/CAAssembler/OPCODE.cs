@@ -41,8 +41,8 @@ namespace CAAssembler
         public static readonly OPCODE MULI = new("MULI", 0b_01_1111, InstType.I);
         public static readonly OPCODE GADD9B = new("GADD9B", 0b_10_0000, InstType.G);
         public static readonly OPCODE GSUB9B = new("GSUB9B", 0b_10_0001, InstType.G);
-        public static readonly OPCODE GSTORE9B = new("GSTORE9B", 0b_10_0010, InstType.G);
-        public static readonly OPCODE GLOAD9B = new("GLOAD9B", 0b_10_0011, InstType.G);
+        public static readonly OPCODE GSTORE = new("GSTORE", 0b_10_0010, InstType.G);
+        public static readonly OPCODE GLOAD = new("GLOAD", 0b_10_0011, InstType.G);
         public static readonly OPCODE GAVG9B = new("GAVG9B", 0b_10_0100, InstType.G);
 
         public static string? Assemble(string line)
@@ -68,6 +68,7 @@ namespace CAAssembler
             sb.Append(Convert.ToString(opcode._opcode, 2).PadLeft(6, '0'));
 
             Console.WriteLine("OPCODE Parse Done : " + sb.ToString());
+            Console.WriteLine("PL : " + parsed.Length);
 
             switch (opcode._insttype)
             {
@@ -114,7 +115,7 @@ namespace CAAssembler
                             if (dest is null) return null;
 
                             sb.Append('0', 21);
-                            sb.Append((byte)dest);
+                            sb.Append(Convert.ToString((byte)dest, 2).PadLeft(5, '0'));
                             break;
                         }
                         if (opcode == GADD9B || opcode == GSUB9B) //imm만 있음 (8바이트)
@@ -129,7 +130,7 @@ namespace CAAssembler
                             sb.Append('0', 10);
                             sb.Append(Convert.ToString((UInt16)Imm8, 2).PadLeft(16, '0'));
                         }
-                        if (opcode == GLOAD9B) //R typpe 과 같음
+                        if (opcode == GLOAD) //R typpe 과 같음
                         {
                             if (parsed.Length != 4) return null;
 
@@ -144,7 +145,7 @@ namespace CAAssembler
                             sb.Append('0', 11);
                             sb.Append(Convert.ToString((byte)rs3, 2).PadLeft(5, '0'));
                         }
-                        if (opcode == GSTORE9B) //rs2만
+                        if (opcode == GSTORE) //rs2만
                         {
                             if (parsed.Length != 2) return null;
 

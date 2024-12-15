@@ -9,7 +9,7 @@ namespace CAAssembler
 {
     class Program
     {
-        const string INPUTPATH = "input.csv";
+        const string INPUTPATH = "input.txt";
         const string OUTPUTPATH = "output.txt";
 
         static void Main(string[] args)
@@ -45,7 +45,7 @@ namespace CAAssembler
                         else
                         {
                             parseFailCnt++;
-                            wr.WriteLine(new string('0', 32));
+                            wr.WriteLine(new string('0', 32) + " F ");
                         }
 
                     }
