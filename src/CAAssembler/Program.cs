@@ -9,13 +9,15 @@ namespace CAAssembler
 {
     class Program
     {
-        const string INPUTPATH = "input.txt";
-        const string OUTPUTPATH = "output.txt";
+        const string INPUTPATH      = "input.txt";
+        const string OUTPUTPATH     = "output.txt";
 
         static void Main(string[] args)
         {
             ulong parseCnt = 0;
             ulong parseFailCnt = 0;
+
+            OutFile outFile = new OutFile(OUTPUTPATH);
 
             if (!File.Exists(INPUTPATH))
             {
@@ -26,31 +28,41 @@ namespace CAAssembler
 
             try
             {
-                using (StreamWriter wr = new StreamWriter(OUTPUTPATH))
                 using (StreamReader rd = new StreamReader(INPUTPATH))
                 {
                     string? line;
 
                     while ((line = rd.ReadLine()) != null)
                     {
+                        if (string.IsNullOrWhiteSpace(line)) continue;
+
                         parseCnt++;
-                        Console.Write("Assembling {0} lines...\r", parseCnt);
 
 
                         var assembled = OPCODE.Assemble(line);
 
                         if (assembled is not null)
                         {
-                            wr.WriteLine(assembled.ToString());
-                        }
-                        else
-                        {
-                            parseFailCnt++;
-                            wr.WriteLine(new string('0', 32) + " Failed");
+                            outFile.AppendCode(assembled);
+                            continue;
                         }
 
+                        var data = DataParser.ParseHex(line);
+                        
+                        if(data.HasValue)
+                        {
+                            outFile.AppendData(data.Value.Key, data.Value.Value );
+                            continue;
+                        }
+
+                        //ParseFailed
+                        parseFailCnt++;
+                        outFile.AppendCode(0);
                     }
                 }
+
+
+                outFile.WriteFile();
             }
             catch (Exception e) { Console.WriteLine(e.StackTrace); }
             finally {; }

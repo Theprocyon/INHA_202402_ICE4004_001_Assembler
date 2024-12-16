@@ -52,7 +52,6 @@ namespace CAAssembler
 
             //for test 241214
             OPCODE? opcode = null;
-            InstType? instType = null;
 
             string[] parsed = line.Split(',');
 
@@ -67,7 +66,7 @@ namespace CAAssembler
 
             sb.Append(Convert.ToString(opcode._opcode, 2).PadLeft(6, '0'));
 
-            Console.WriteLine("OPCODE Parse Done : " + sb.ToString());
+            //Console.WriteLine("OPCODE Parse Done : " + sb.ToString());
 
             switch (opcode._insttype)
             {
