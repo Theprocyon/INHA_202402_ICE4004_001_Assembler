@@ -128,22 +128,7 @@ namespace CAAssembler
                             sb.Append('0', 10);
                             sb.Append(Convert.ToString((UInt16)Imm8, 2).PadLeft(16, '0'));
                         }
-                        if (opcode == GLOAD) //R typpe 과 같음
-                        {
-                            if (parsed.Length != 4) return null;
-
-                            byte? rs1 = ParseReg(parsed[1]);
-                            byte? rs2 = ParseReg(parsed[2]);
-                            byte? rs3 = ParseReg(parsed[3]);
-
-                            if (rs1 is null || rs2 is null || rs3 is null) return null;
-
-                            sb.Append(Convert.ToString((byte)rs1, 2).PadLeft(5, '0'));
-                            sb.Append(Convert.ToString((byte)rs2, 2).PadLeft(5, '0'));
-                            sb.Append('0', 11);
-                            sb.Append(Convert.ToString((byte)rs3, 2).PadLeft(5, '0'));
-                        }
-                        if (opcode == GSTORE) //rs2만
+                        if (opcode == GSTORE || opcode == GLOAD) //rs2만
                         {
                             if (parsed.Length != 2) return null;
 
